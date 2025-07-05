@@ -18,6 +18,7 @@
 <script>
 import jobsJson from '@/jobs.json'
 import JobListing from '@/components/JobListing.vue'
+
 export default {
     components: {
         JobListing

@@ -1,22 +1,16 @@
 <template>
-    <Navbar/>
-    <Hero/>
-    <HomeCard/>
-    <JobListings :limit="3" :showButton="true"/>
+    <Navbar />
+    <RouterView />
 </template>
 
 <script>
-    import Navbar from './components/Navbar.vue';
-    import Hero from './components/Hero.vue';
-    import HomeCard from './components/HomeCard.vue';
-import JobListings from './components/JobListings.vue';
+import Navbar from './components/Navbar.vue';
+import { RouterView } from 'vue-router';
 
-    export default {
-        components: {
-            Navbar,
-            Hero,
-            HomeCard,
-            JobListings
-        }
+export default {
+    components: {
+        Navbar,
+        RouterView
     }
+}
 </script>

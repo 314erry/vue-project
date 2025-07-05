@@ -56,7 +56,7 @@ export default {
 
     methods: {
         toggleFullDescription() {
-            this.showFullDescription = true
+            this.showFullDescription = !this.showFullDescription
         }
     }
 }
