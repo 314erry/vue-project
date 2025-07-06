@@ -30,7 +30,8 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 export default {
     components: {
         JobListing,
-        RouterLink
+        RouterLink,
+        PulseLoader
     },
 
     props: {
