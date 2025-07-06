@@ -10,15 +10,26 @@
                     </RouterLink>
                     <div class="md:ml-auto">
                         <div class="flex space-x-2">
-                            <RouterLink to="/"
-                                class="text-white bg-green-900 hover:bg-gray-900 hover:text-white rounded-md px-3 py-2">
+                            <RouterLink to="/" :class="[isActiveLink('/') ? 'bg-green-900' : 'hover:bg-gray-900 hover:text-white',
+                                'text-white',
+                                'px-3',
+                                'py-2',
+                                'rounded-md']">
                                 Home
                             </RouterLink>
-                            <RouterLink to="/jobs"
-                                class="text-white hover:bg-green-900 hover:text-white rounded-md px-3 py-2">Jobs
+                            <RouterLink to="/jobs" :class="[isActiveLink('/jobs') ? 'bg-green-900' : 'hover:bg-gray-900 hover:text-white',
+                                'text-white',
+                                'px-3',
+                                'py-2',
+                                'rounded-md']">
+                                Jobs
                             </RouterLink>
-                            <RouterLink to="/jobs/add"
-                                class="text-white hover:bg-green-900 hover:text-white rounded-md px-3 py-2">Add Job
+                            <RouterLink to="/jobs/add" :class="[isActiveLink('/jobs/add') ? 'bg-green-900' : 'hover:bg-gray-900 hover:text-white',
+                                'text-white',
+                                'px-3',
+                                'py-2',
+                                'rounded-md']">
+                                Add Job
                             </RouterLink>
                         </div>
                     </div>
@@ -30,7 +41,7 @@
 
 <script>
 import Logo from '@/assets/img/logo.png';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 
 export default {
     data() {
@@ -38,5 +49,11 @@ export default {
             Logo
         }
     },
+
+    methods: {
+        isActiveLink(routePath) {
+            return useRoute().path === routePath;
+        }
+    }
 }
 </script>

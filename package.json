@@ -6,10 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "json-server src/jobs.json --port 5000"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
+    "axios": "^1.10.0",
+    "json-server": "^1.0.0-beta.3",
     "primeicons": "^7.0.0",
     "view-router": "^0.2.3",
     "vue": "^3.5.17",

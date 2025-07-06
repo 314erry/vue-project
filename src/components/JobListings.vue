@@ -10,18 +10,21 @@
         </div>
     </section>
     <section v-if="showButton" class="m-auto max-w-lg my-10 px-6">
-        <a href="/jobs" class="block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700">View
-            All Jobs</a>
+        <RouterLink to="/jobs" class="block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700">
+            All Jobs
+        </RouterLink>
     </section>
 </template>
 
 <script>
-import jobsJson from '@/jobs.json'
 import JobListing from '@/components/JobListing.vue'
+import { RouterLink } from 'vue-router'
+import axios from 'axios'
 
 export default {
     components: {
-        JobListing
+        JobListing,
+        RouterLink
     },
 
     props: {
@@ -34,7 +37,16 @@ export default {
 
     data() {
         return {
-            jobs: jobsJson,
+            jobs: [],
+        }
+    },
+
+    async mounted() {
+        try {
+            const response = await axios.get('http://localhost:5000/jobs');
+            this.jobs = response.data;
+        } catch (error) {
+            console.error('Error fetching jobs', error);
         }
     }
 }
