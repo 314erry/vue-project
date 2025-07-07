@@ -100,9 +100,6 @@
 
 <script>
 import axios from 'axios';
-import { useToast } from 'vue-toastification';
-
-const toast = useToast();
 
 export default {
     data() {
@@ -142,14 +139,9 @@ export default {
 
             try {
                 const response = await axios.post('/api/jobs', newJob);
-                toast.success('Job Added Successfully!')
-                this.$router.push({
-                    path: `/jobs/${response.data.id}`,
-                    query: { added: '1' }
-                });
+                this.$router.push(`/jobs/${response.data.id}`);
             } catch (error) {
                 console.error('Error fetching jobs', error);
-                toast.error('Error Adding Job!')
             }
         }
     }

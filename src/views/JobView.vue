@@ -62,7 +62,7 @@
                             class="bg-green-500 hover:bg-green-600 text-white text-center font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block">
                             Edit
                             Job</RouterLink>
-                        <button
+                        <button @click="deleteJob"
                             class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline mt-4 block">
                             Delete Job
                         </button>
@@ -80,11 +80,8 @@
 <script>
 import axios from 'axios'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
-import { useRoute, RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router'
 import BackButton from '@/components/BackButton.vue'
-
-import { useToast } from 'vue-toastification';
-const toast = useToast();
 
 export default {
     components: {
@@ -95,24 +92,32 @@ export default {
     data() {
         return {
             job: [],
-            jobId: useRoute().params.id,
             isLoading: true
         }
     },
 
 
     async mounted() {
-        if (this.$route.query.added === '1') {
-            toast.success('Job Added Successfully!');
-        }
-
         try {
-            const response = await axios.get(`/api/jobs/${this.jobId}`);
+            const jobId = this.$route.params.id;
+            const response = await axios.get(`/api/jobs/${jobId}`);
             this.job = response.data;
         } catch (error) {
             console.error('Error fetching job', error);
         } finally {
             this.isLoading = false;
+        }
+    },
+
+    methods: {
+        async deleteJob() {
+            try {
+                const jobId = this.$route.params.id;
+                await axios.delete(`/api/jobs/${jobId}`);
+                this.$router.push('/jobs')
+            } catch (error) {
+                console.log('Error deleting job', error)
+            }
         }
     }
 }
