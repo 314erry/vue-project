@@ -83,6 +83,9 @@ import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 import { useRoute, RouterLink } from 'vue-router'
 import BackButton from '@/components/BackButton.vue'
 
+import { useToast } from 'vue-toastification';
+const toast = useToast();
+
 export default {
     components: {
         PulseLoader,
@@ -99,6 +102,10 @@ export default {
 
 
     async mounted() {
+        if (this.$route.query.added === '1') {
+            toast.success('Job Added Successfully!');
+        }
+
         try {
             const response = await axios.get(`/api/jobs/${this.jobId}`);
             this.job = response.data;
