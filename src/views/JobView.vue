@@ -100,7 +100,7 @@ export default {
 
     async mounted() {
         try {
-            const response = await axios.get(`http://localhost:5000/jobs/${this.jobId}`);
+            const response = await axios.get(`/api/jobs/${this.jobId}`);
             this.job = response.data;
         } catch (error) {
             console.error('Error fetching job', error);
