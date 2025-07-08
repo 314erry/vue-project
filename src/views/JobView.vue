@@ -92,6 +92,7 @@ export default {
     data() {
         return {
             job: [],
+            jobId: this.$route.params.id,
             isLoading: true
         }
     },
@@ -99,8 +100,7 @@ export default {
 
     async mounted() {
         try {
-            const jobId = this.$route.params.id;
-            const response = await axios.get(`/api/jobs/${jobId}`);
+            const response = await axios.get(`/api/jobs/${this.jobId}`);
             this.job = response.data;
         } catch (error) {
             console.error('Error fetching job', error);
@@ -112,8 +112,7 @@ export default {
     methods: {
         async deleteJob() {
             try {
-                const jobId = this.$route.params.id;
-                await axios.delete(`/api/jobs/${jobId}`);
+                await axios.delete(`/api/jobs/${this.jobId}`);
                 this.$router.push('/jobs')
             } catch (error) {
                 console.log('Error deleting job', error)
